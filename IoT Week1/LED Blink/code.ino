@@ -1,16 +1,21 @@
-// LED Blink Program - v1.1
-// Description: Basic LED blink with named constants and comments
+// LED Blink Program - v1.2
+// Description: Added Serial Monitor feedback
 
-const int LED_PIN = 13;      // Built-in LED pin on Arduino Uno
-const int BLINK_DELAY = 1000; // Delay in milliseconds
+const int LED_PIN = 13;
+const int BLINK_DELAY = 1000;
 
 void setup() {
-  pinMode(LED_PIN, OUTPUT);  // Set LED pin as output
+  pinMode(LED_PIN, OUTPUT);
+  Serial.begin(9600);
+  Serial.println("LED Blink Program v1.2 Started");
 }
 
 void loop() {
-  digitalWrite(LED_PIN, HIGH);  // Turn LED ON
+  digitalWrite(LED_PIN, HIGH);
+  Serial.println("LED ON");
   delay(BLINK_DELAY);
-  digitalWrite(LED_PIN, LOW);   // Turn LED OFF
+
+  digitalWrite(LED_PIN, LOW);
+  Serial.println("LED OFF");
   delay(BLINK_DELAY);
 }
