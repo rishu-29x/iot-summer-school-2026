@@ -42,7 +42,7 @@ This project blinks an LED at a **variable speed** controlled by a potentiometer
 
 ## 💻 Code
 
-The full sketch is available in [`led_blink_potentiometer.ino`](./led_blink_potentiometer.ino) in this folder.
+The full sketch is available in [`led_blink_potentiometer.ino`](./LED BLINK code.ino) in this folder.
 
 ## 📌 Key Concepts Learned
 
