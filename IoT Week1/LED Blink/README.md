@@ -1,69 +1,65 @@
-## Project Title
+# LED Blink with Potentiometer Speed Control 🔆
 
-**Arduino LED Blink** — A foundational IoT project demonstrating digital output control by blinking the built-in LED on Arduino Uno every second.
+## 📖 Project Overview
 
-----------------------------------------
+This project blinks an LED at a **variable speed** controlled by a potentiometer. The potentiometer's analog value is read and mapped to a delay range, so turning the knob makes the LED blink faster or slower in real time. Each blink is also counted and logged to the Serial Monitor along with the current blink speed.
 
-## Hardware Required
+## 🎯 Objective
+
+- Read analog input from a potentiometer using `analogRead()`
+- Map analog values to a usable output range using `map()`
+- Control LED blink timing dynamically based on user input
+- Track and display real-time data (blink count and speed) over Serial
+
+## 🛠️ Components Used
 
 | Component | Quantity |
-|-----------|----------|
-| Arduino Uno | 1 |
-| LED (Red) | 1 |
+|---|---|
+| Arduino UNO | 1 |
+| LED | 1 |
+| Potentiometer (10kΩ) | 1 |
 | Resistor (220Ω) | 1 |
+| Jumper Wires | As required |
 | Breadboard | 1 |
-| Jumper Wires | 2 |
-| USB Cable (Type-B) | 1 |
 
-----------------------------------------
+## 🔌 Circuit Connections
 
-## Circuit Diagram Description
+| Component | Arduino Pin |
+|---|---|
+| LED (Anode) | Pin 13 |
+| LED (Cathode) | GND (via resistor) |
+| Potentiometer Wiper | A0 |
+| Potentiometer Terminal 1 | 5V |
+| Potentiometer Terminal 2 | GND |
 
-The circuit is built as follows:
-- Connect the **positive leg (anode)** of the LED to **Pin 13** on the Arduino
-- Connect a **220Ω resistor** in series between Pin 13 and the LED anode
-- Connect the **negative leg (cathode)** of the LED to **GND** on the Arduino
-- The resistor protects the LED from excess current
+## ⚙️ How It Works
 
-----------------------------------------
+1. The potentiometer's position is read as an analog value (0–1023) on pin `A0`.
+2. `map()` converts this value into a blink delay ranging from **100ms (fast)** to **1000ms (slow)**.
+3. The LED on pin 13 turns ON and OFF using this mapped delay, creating a variable blink rate.
+4. Each completed blink cycle increments `blinkCount`.
+5. The current blink count and speed are printed to the Serial Monitor after every cycle, allowing live monitoring of the LED's behavior.
 
-## How to Upload Code
+## 💻 Code
 
-Follow these steps to upload the code to your Arduino:
+The full sketch is available in [`led_blink_potentiometer.ino`](./led_blink_potentiometer.ino) in this folder.
 
-1. Install **Arduino IDE** from https://www.arduino.cc/en/software
-2. Connect Arduino Uno to your computer using a **USB cable**
-3. Open Arduino IDE → click **File** → **Open** → select `code.ino`
-4. Go to **Tools** → **Board** → select **Arduino Uno**
-5. Go to **Tools** → **Port** → select the correct COM port
-6. Click the **Upload button** (right arrow icon)
-7. Wait for "Done uploading" message at the bottom
-8. The LED on Pin 13 should start blinking every second
+## 📌 Key Concepts Learned
 
-----------------------------------------
+- Analog input reading with `analogRead()`
+- Value mapping/scaling using `map()`
+- Real-time Serial communication and data logging
+- Using variables to track program state (blink count)
+- Basic user-input-driven timing control
 
-## Expected Output
+## 🚀 Possible Improvements
 
-- The LED turns **ON** for 1 second
-- The LED turns **OFF** for 1 second
-- This cycle repeats **indefinitely**
-- Serial Monitor (9600 baud) shows:
-- LED Blink Program v1.3 Started
+- Replace blocking `delay()` calls with `millis()` for non-blocking blinking
+- Add a reset button to zero out the blink count
+- Display blink speed on an LCD instead of Serial Monitor
+- Clamp potentiometer readings to handle noisy analog input more reliably
 
-Blink #1 - LED ON
+## ✍️ Author
 
-LED OFF
-
-Blink #2 - LED ON
-
-LED OFF
-
-----------------------------------------
-
-## Troubleshooting Tips
-
-1. **LED not blinking** — Check that the LED legs are correctly oriented (longer leg = anode = Pin 13)
-2. **Upload error** — Make sure the correct COM port is selected under Tools → Port
-3. **LED very dim** — Replace the 220Ω resistor; it may have too high a resistance value
-4. **"Port not found" error** — Try a different USB cable or USB port on your computer
-5. **Board not detected** — Reinstall the Arduino USB driver or restart Arduino IDE
+**Rishu Jaiswal**
+IoT Summer School 2026 — Week 1
