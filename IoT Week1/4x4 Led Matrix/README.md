@@ -55,7 +55,7 @@ The matrix cycles through a sequence of characters — including custom letters 
 
 ## 💻 Code
 
-The full sketch is available in [`led_matrix_display.ino`](./led_matrix_display.ino) in this folder.
+The full sketch is available in [`led_matrix_display.ino`](./code.ino) in this folder.
 
 ## 📌 Key Concepts Learned
 
