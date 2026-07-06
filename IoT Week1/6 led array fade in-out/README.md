@@ -44,7 +44,7 @@ This project controls an array of **6 LEDs** connected to PWM-capable pins, maki
 
 ## 💻 Code
 
-The full sketch is available in [`led_array_fade.ino`](./led_array_fade.ino) in this folder.
+The full sketch is available in [`led_array_fade.ino`](./code.ino) in this folder.
 
 ## 📌 Key Concepts Learned
 
