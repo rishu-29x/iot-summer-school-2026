@@ -1,170 +1,66 @@
-# 🚦 Traffic Light Controller
+# Traffic Light Controller with Pedestrian Override 🚦
 
-An Arduino-based traffic light simulator with a **pedestrian button override** — press the button at any point during the cycle and the light immediately forces RED for pedestrian crossing safety.
+## 📖 Project Overview
 
----
+This project simulates a standard **RED → YELLOW → GREEN** traffic light cycle using three LEDs, with an added **pedestrian button override**. If the button is pressed at any point during the cycle, the light immediately switches to RED and holds there for a fixed duration, simulating a real-world pedestrian crossing signal.
 
-## 📋 Table of Contents
+## 🎯 Objective
 
-- [Overview](#overview)
-- [Features](#features)
-- [Hardware Requirements](#hardware-requirements)
-- [Circuit Diagram](#circuit-diagram)
-- [Pin Configuration](#pin-configuration)
-- [How It Works](#how-it-works)
-- [Light Cycle Timing](#light-cycle-timing)
-- [Serial Monitor Output](#serial-monitor-output)
-- [Getting Started](#getting-started)
-- [Code Structure](#code-structure)
-- [Author](#author)
+- Implement a timed, repeating state cycle for traffic light phases
+- Use `millis()`-based waiting so button presses can interrupt a phase early
+- Handle an external interrupt-like condition (button press) using `goto` for phase jumping
+- Log real-time system state and timestamps to the Serial Monitor
 
----
-
-## Overview
-
-This project simulates a real-world traffic light controller using an Arduino. It cycles through RED, YELLOW, and GREEN phases automatically. At any point in the cycle, pressing a pedestrian pushbutton immediately interrupts the sequence and forces the light to RED for 8 seconds, allowing pedestrians to safely cross.
-
----
-
-## Features
-
-- Automatic RED → YELLOW → GREEN traffic light cycling
-- Pedestrian button override — interrupts any phase instantly
-- Non-blocking button polling during each phase (no missed presses)
-- Serial Monitor logging with timestamps for each phase change
-- Uses `INPUT_PULLUP` for reliable, noise-resistant button reading
-
----
-
-## Hardware Requirements
+## 🛠️ Components Used
 
 | Component | Quantity |
 |---|---|
-| Arduino Uno (or compatible) | 1 |
-| Red LED | 1 |
-| Yellow LED | 1 |
-| Green LED | 1 |
-| 220Ω resistor | 3 |
-| Pushbutton | 1 |
+| Arduino UNO | 1 |
+| LEDs (Red, Yellow, Green) | 3 |
+| Push Button | 1 |
+| Resistors (220Ω) | 3 |
+| Jumper Wires | As required |
 | Breadboard | 1 |
-| Jumper wires | As needed |
 
----
+## 🔌 Circuit Connections
 
-## Circuit Diagram
-
-```
-Arduino        Component
--------        ---------
-
-Pin 4  ──[220Ω]──► RED LED ──► GND
-Pin 3  ──[220Ω]──► YELLOW LED ──► GND
-Pin 2  ──[220Ω]──► GREEN LED ──► GND
-
-Pin 7  ──────────► BUTTON ──► GND
-                   (INPUT_PULLUP — no external resistor needed)
-```
-
-> **Note:** The button uses the Arduino's internal pull-up resistor (`INPUT_PULLUP`). One leg of the button connects to Pin 7 and the other directly to GND. No external resistor is required.
-
----
-
-## Pin Configuration
-
-| Arduino Pin | Role | Direction |
-|---|---|---|
-| 2 | Green LED | OUTPUT |
-| 3 | Yellow LED | OUTPUT |
-| 4 | Red LED | OUTPUT |
-| 7 | Pedestrian Button | INPUT_PULLUP |
-
----
-
-## How It Works
-
-The `loop()` function cycles through three traffic light phases in order. Between each phase, `waitWithButtonCheck()` polls the button every 50 ms for the duration of that phase. If the button is detected (reads `LOW` due to `INPUT_PULLUP`), the function returns `true` and the code jumps to the `pedestrian` label, overriding the rest of the cycle.
-
-**Normal cycle flow:**
-
-```
-RED (5s) → YELLOW (2s) → GREEN (4s) → repeat
-```
-
-**Button pressed at any point:**
-
-```
-→ RED forced ON for 8 seconds → cycle resumes normally
-```
-
----
-
-## Light Cycle Timing
-
-| Phase | Duration | Trigger |
-|---|---|---|
-| 🔴 RED | 5 seconds | Normal cycle start |
-| 🟡 YELLOW | 2 seconds | After RED |
-| 🟢 GREEN | 4 seconds | After YELLOW |
-| 🔴 PEDESTRIAN RED | 8 seconds | Button pressed (any phase) |
-
----
-
-## Serial Monitor Output
-
-Open the Serial Monitor at **9600 baud** to observe real-time phase changes with millisecond timestamps.
-
-```
-Traffic Light Controller Started
-RED ON | Time: 1023
-YELLOW ON | Time: 6045
-GREEN ON | Time: 8067
-PEDESTRIAN BUTTON PRESSED - RED FORCED ON | Time: 10112
-RED ON | Time: 18115
-...
-```
-
----
-
-## Getting Started
-
-1. **Wire the circuit** according to the pin configuration and circuit diagram above.
-
-2. **Open the sketch** in the [Arduino IDE](https://www.arduino.cc/en/software).
-
-3. **Select your board and port:**
-   - Tools → Board → Arduino Uno
-   - Tools → Port → (select your COM/tty port)
-
-4. **Upload the sketch** using the upload button (→).
-
-5. **Open Serial Monitor** (Ctrl+Shift+M) at **9600 baud** to view live logs.
-
-6. **Press the button** at any time to test the pedestrian override.
-
----
-
-## Code Structure
-
-```
-traffic_light_controller/
-│
-├── traffic_light_controller.ino   # Main Arduino sketch
-└── README.md                      # Project documentation
-```
-
-**Key functions:**
-
-| Function | Description |
+| Component | Arduino Pin |
 |---|---|
-| `setup()` | Configures pin modes and starts Serial communication |
-| `allOff()` | Turns off all three LEDs |
-| `waitWithButtonCheck(duration)` | Waits for the given duration while polling the button every 50 ms; returns `true` if button is pressed |
-| `loop()` | Runs the RED → YELLOW → GREEN cycle; jumps to pedestrian override when button is pressed |
+| Red LED | Pin 4 |
+| Yellow LED | Pin 3 |
+| Green LED | Pin 2 |
+| Pedestrian Button | Pin 7 |
 
----
+> **Note:** The button uses `INPUT_PULLUP`, so it reads **HIGH when unpressed** and **LOW when pressed** — no external resistor is needed.
 
-## Author
+## ⚙️ How It Works
+
+1. The traffic light cycles through three phases in order: **RED (5s) → YELLOW (2s) → GREEN (4s)**, with only one LED lit at a time via the `allOff()` helper function.
+2. Instead of a plain `delay()`, each phase uses `waitWithButtonCheck()`, which continuously polls the button every 50ms throughout the phase duration.
+3. If the button is pressed **at any point** during a phase, `waitWithButtonCheck()` returns `true` immediately, and the program jumps straight to the `pedestrian:` label using `goto`.
+4. In the pedestrian phase, all LEDs are turned off, RED is forced ON, and the light holds there for **8 seconds** before the normal cycle resumes from the top.
+5. Every phase change and the pedestrian override are logged to the Serial Monitor along with the `millis()` timestamp, making it easy to trace the light's behavior over time.
+
+## 💻 Code
+
+The full sketch is available in [`traffic_light.ino`](./traffic_light.ino) in this folder.
+
+## 📌 Key Concepts Learned
+
+- Non-blocking, interruptible timing using `millis()` instead of `delay()`
+- Polling an input during a wait period to react to external events mid-phase
+- Using `goto` for simple state jumps (and understanding its trade-offs)
+- Structuring a repeating state machine for hardware control
+- Serial logging for real-time system monitoring and debugging
+
+## 🚀 Possible Improvements
+
+- Replace `goto` with a proper state machine (e.g., `switch`/`enum`) for cleaner, more maintainable logic
+- Add a pedestrian "walk" LED or buzzer during the RED-forced phase
+- Add a countdown display showing time remaining in the current phase
+- Debounce the button press more robustly to avoid double-triggering on noisy signals
+
+## ✍️ Author
 
 **Rishu Jaiswal**
-
-Feel free to fork, modify, and build upon this project. If you found it useful, consider leaving a ⭐ on the repository!
+IoT Summer School 2026 — Week 2
