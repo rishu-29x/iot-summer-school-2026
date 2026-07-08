@@ -1,8 +1,11 @@
-**Q36. MQTT vs HTTP Comparison
-Create a table comparing MQTT and HTTP across: Architecture pattern, Data transfer model, Power consumption, Latency, Use case suitability for IoT, and Security considerations. Based on your analysis, which would you choose for a 1000-node smart agriculture deployment and why?**
+# Q36. MQTT vs HTTP Comparison
 
+**Question:** Create a table comparing MQTT and HTTP across: Architecture pattern, Data transfer model, Power consumption, Latency, Use case suitability for IoT, and Security considerations. Based on your analysis, which would you choose for a 1000-node smart agriculture deployment and why?
 
-**Ans:**
+---
+
+## Answer
+
 ### Comparison Table
 
 | Parameter | MQTT | HTTP |
@@ -19,6 +22,7 @@ Create a table comparing MQTT and HTTP across: Architecture pattern, Data transf
 **MQTT is the clear choice.**
 
 **Reasoning:**
+
 1. **Scalability** – With 1000 nodes (soil moisture, temperature, humidity sensors, irrigation actuators, etc.), the publish-subscribe model lets all nodes report to a single broker without each node needing to know about every consumer. Adding more nodes/subscribers later needs no code changes on existing devices.
 2. **Power Efficiency** – Agricultural sensors are typically battery or solar powered and deployed in remote fields. MQTT's low-overhead, persistent-connection model significantly extends battery life compared to HTTP's repeated handshakes.
 3. **Network Conditions** – Rural/field deployments often have unstable, low-bandwidth connectivity (2G/LoRa/NB-IoT). MQTT's small packet size and QoS levels (0/1/2) handle intermittent connectivity gracefully, with built-in "Last Will and Testament" to flag offline sensors.
