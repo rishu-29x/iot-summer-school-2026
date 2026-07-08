@@ -27,37 +27,37 @@ Week 1 focused on building a strong foundation in embedded systems using the Ard
 Displays custom characters on a 4x4 LED grid using row-column multiplexing — LEDs are scanned so fast the human eye sees a stable image. Cycles through letters and a smiley face automatically.
 
 - **Folder:** [`4x4 Led Matrix`](./4x4%20Led%20Matrix)
-- **Tinkercad:** *[Paste link here]*
+- **Tinkercad:** *[https://www.tinkercad.com/things/3NFpcM6rf1A-w14x4ledmatrix?sharecode=hy5v46zgJShQPiuPl_g2G9jPZMT2n0p6dPnYmt_vn5Y]*
 
 ### 💡 2. 6 LED Array Fade In-Out
 Six LEDs fade smoothly in and out one after another using `analogWrite()`, creating a flowing wave-like light effect across the array.
 
 - **Folder:** [`6 led array fade in-out`](./6%20led%20array%20fade%20in-out)
-- **Tinkercad:** *[Paste link here]*
+- **Tinkercad:** *[https://www.tinkercad.com/things/32LDDR4yPpn-6-led-array-fade-in-out?sharecode=Mprp9nm-jsT3qPnD2lJhOUrPWE6UxgkcoClFosTKsos]*
 
 ### 🎲 3. 7 LED Dice
 A fully working electronic dice — press a button to trigger a spinning animation across 7 LEDs in a classic dice-dot layout, gradually slowing down before landing on a random result.
 
 - **Folder:** [`7_led_dice`](./7_led_dice)
-- **Tinkercad:** *[Paste link here]*
+- **Tinkercad:** *[https://www.tinkercad.com/things/bPh2akpuQs6-w17leddice?sharecode=eeRt7jEKYgFW16q3yflPR4NPKyWk4vG7rzj_Mn_GkuQ]*
 
-### 🔆 4. LED Blink — Potentiometer Control
+### 🔆 4. LED Blink
 An LED blinks at a speed controlled live by a potentiometer. Blink count and current speed are logged in real time to the Serial Monitor.
 
 - **Folder:** [`LED Blink`](./LED%20Blink)
-- **Tinkercad:** *[Paste link here]*
+- **Tinkercad:** *[https://www.tinkercad.com/things/jhu2Q3xJOWo-w1led-blink?sharecode=uEvsqo6pySyKmQwHPA2WyAVvXy03zNsfqztezH1I5C0]*
 
 ### ❤️ 5. Heartbeat LED Pulse
 Three LEDs pulse together in sync to mimic a realistic heartbeat at 72 BPM, using `millis()` for precise, non-blocking fade timing.
 
 - **Folder:** [`led_heartbeat`](./led_heartbeat)
-- **Tinkercad:** *[Paste link here]*
+- **Tinkercad:** *[https://www.tinkercad.com/things/7GxITM3HkzA-w1ledheartbeat?sharecode=uTpWc9VhHRdZnQ9cPkPs3FYSEXFICT2AXsa4uzafYqU]*
 
 ### 🔘 6. Push Button LED Toggle
 Pressing a push button toggles an LED on and off, rather than lighting it only while held. Uses `INPUT_PULLUP` with simple debounce logic for reliable single-press detection.
 
 - **Folder:** [`led_push_button`](./led_push_button)
-- **Tinkercad:** *[Paste link here]*
+- **Tinkercad:** *[https://www.tinkercad.com/things/3YwOBnZo6Ys-w1ledpushbutton?sharecode=5I9lIbJuuC0UsqGTGjKi7cO5zVcTsVXlGwZ1hRn7aFQ]*
 
 ---
 
