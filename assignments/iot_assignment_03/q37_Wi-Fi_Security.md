@@ -1,6 +1,8 @@
 **Q37. Wi-Fi Security for IoT
 Research and write 250 words on: Common Wi-Fi attack vectors on IoT devices (WPA2 vulnerabilities, evil twin attacks), Best practices for securing ESP32 Wi-Fi connections (certificate pinning, WPA3), and Why hardcoding passwords in IoT source code is dangerous. Reference at least 2 sources in your answer.**
 
+
+**Ans:**
 **Common Wi-Fi Attack Vectors on IoT Devices**
 
 Most IoT devices still rely on WPA2, and its four way handshake has a well known flaw known as KRACK. This lets an attacker force the reinstallation of an already used encryption key, which can allow interception of network traffic since KRACK exploits vulnerabilities in the WPA2 protocol, meaning any device that connects to Wi-Fi and uses WPA2 is potentially at risk. Many IoT devices never receive firmware patches, so the problem persists long after it was disclosed since embedded devices like cameras, routers, and smart home devices that never received KRACK patches remain vulnerable even today.
