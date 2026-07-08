@@ -8,7 +8,7 @@
 
 An IoT gateway sits between sensor nodes and the cloud. It collects data from multiple sensors (often over low power, short range protocols), then converts and forwards it to the internet using standard networking protocols. It can also do local processing, filtering, and protocol translation, so sensors don't have to talk directly to the cloud.
 
-## Architecture Diagram
+## Diagram: Sensor Nodes → Gateway → Cloud → User Application
 
 ```mermaid
 flowchart TD
@@ -29,10 +29,8 @@ flowchart TD
 
 ## Protocols Typically Used at Each Layer
 
-| Layer | Protocols | Why |
-|---|---|---|
-| **Sensor → Gateway** | Zigbee, BLE, LoRa, Z-Wave | Low power, short-to-medium range |
-| **Gateway → Cloud** | MQTT, HTTP/HTTPS, CoAP | Reliable, internet-based transport |
-| **Cloud → User Application** | REST API, WebSocket | Fetch or push data to dashboards/apps in real time |
-
----
+| Layer | Protocols |
+|---|---|
+| **Sensor Nodes → Gateway** | Zigbee, BLE, LoRa, Z-Wave |
+| **Gateway → Cloud** | MQTT, HTTP/HTTPS, CoAP |
+| **Cloud → User Application** | REST API, WebSocket |
