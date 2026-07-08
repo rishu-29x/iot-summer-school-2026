@@ -36,4 +36,3 @@ flowchart TD
 | **Cloud → User Application** | REST API, WebSocket | Fetch or push data to dashboards/apps in real time |
 
 ---
-*That covers the 2 marks. Ready for Q40 when you are.*
